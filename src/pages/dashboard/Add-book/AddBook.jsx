@@ -13,15 +13,16 @@ const AddBook = () => {
     const [imageFileName, setImageFileName] = useState('')
 
     // Handle form submission
-    const onSubmit = async (data) => {
+    const onSubmit = async (data, e) => {
+      e.preventDefault();
  
         const newBookData = {
             ...data,
             coverImage: imageFile //Add cover Image 
         }
         try {
-            // await addBook({...data, newBookData})?.unwrap();
-            await addBook({newBookData})
+            // await addBook({...data, newBookData}).unwrap();
+            await addBook({...data, newBookData})
             Swal.fire({ 
                 title: "Book added",
                 text: "Your book is uploaded successfully!",
@@ -47,7 +48,7 @@ const AddBook = () => {
                 confirmButtonText: "Yes, It's Okay!"
               });   
         }
-        console.log("New Books Adding::::",data?.newBookData);
+        console.log("New Books Adding::::", newBookData);
         console.log("Book:::::",newBookData);
         console.log("DATA:::::", data);
         

@@ -28,7 +28,7 @@ const AdminLogin = () => {
                 }
             })
            const auth = response.data;
-           console.log(auth); 
+           console.log(response.data)
            
            //CHECK IF TOKEN EXISTS AND REDIRECT TO DASHBOARD
            if(auth.token){
@@ -51,6 +51,7 @@ const AdminLogin = () => {
                         navigate("/dashboard");  
         }catch (error) {
             setMessage('Invalid Username and Password');    
+            // message('Invalid Username and Password');    
             console.log(error);
         }
       };

@@ -20,18 +20,20 @@ const UpdateEditBooks = () => {
   const { register, handleSubmit, setValue, reset } = useForm();
 
   useEffect(() => {
+    console.log("bookData::::::::::"  ,bookData)
     if (bookData) {
-      setValue('title', bookData.title);
-      setValue('description', bookData.description);
-      setValue('category', bookData?.category);
-      setValue('trending', bookData.trending);
-      setValue('oldPrice', bookData.oldPrice);
-      setValue('newPrice', bookData.newPrice);
-      setValue('coverImage', bookData.coverImage)
+      setValue('title', bookData.book.title);
+      setValue('description', bookData.book.description);
+      setValue('category', bookData?.book?.category);
+      setValue('trending', bookData.book.trending);
+      setValue('oldPrice', bookData.book.oldPrice);
+      setValue('newPrice', bookData.book.newPrice);
+      setValue('coverImage', bookData.book.coverImage)
     }
   }, [bookData, setValue])
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data, e) => {
+    e.preventDefault();
     const updateBookData = {
       title: data?.title,
       description: data?.description,
@@ -41,15 +43,17 @@ const UpdateEditBooks = () => {
       newPrice: Number(data?.newPrice),
       coverImage: data?.coverImage || bookData?.coverImage,
     };
+    console.log("Book data :::::", data.title)
     try {
       // await updateBook({id, updateBookData}).unwrap();
-      await updateBook({id, updateBookData})
-      // await axios.put(`$${API_URL}/api/books/edit/${id}`, updateBookData, {
+      await updateBook({id, ...updateBookData})
+      // await  axios.put(`$${API_URL}/api/books/edit/${id}`, updateBookData, {
       //   headers: {
       //     'Content-Type': 'application/json',
       //     'Authorization': `Bearer ${localStorage.getItem('token')}`
       //   }
       // })
+      console.log("ID :::: :::: ",id)
       Swal.fire({
         title: "Book Updated Successfully",
         // text: "Your book is updated successfully!",

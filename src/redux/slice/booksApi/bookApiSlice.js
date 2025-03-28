@@ -26,6 +26,7 @@ export const booksApi = createApi({
                 url: '/',
                 method: 'GET',
                 body: data,
+                credentials: 'include',
                 providesTags: ['Books']
             })
         }),
@@ -35,6 +36,7 @@ export const booksApi = createApi({
             query: (id) => ({
                 url: `/${id}`,
                 method: 'GET',
+                credentials: 'include',
                 providesTags: (result, error, id) => [{ type: 'Books', id }],
             })
         }),
@@ -45,7 +47,14 @@ export const booksApi = createApi({
                 url: '/create-book',
                 method: 'POST',
                 body: data,
+                credentials: 'include',
+                // withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                }
             }),
+            // extraOptions: { credentials: "include" },
             invalidatesTags: ['Books']
         }),
 
@@ -55,8 +64,12 @@ export const booksApi = createApi({
                 url: `/edit/${id}`,
                 method: 'PUT',
                 body: data,
+                credentials: 'include',
+                withCredentials: true,
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+
                 }
             }),
             invalidatesTags: ['Books']
@@ -67,6 +80,13 @@ export const booksApi = createApi({
             query: (id) => ({
                 url: `/delete/${id}`,
                 method: 'DELETE',
+                credentials: 'include',
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+
+                }
             }),
             invalidatesTags: ['Books']
         }),

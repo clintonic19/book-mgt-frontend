@@ -13,7 +13,8 @@ const ManageBooks = () => {
     // Handle deleting a book
     const handleDeleteBook = async (id) => {
         try {
-            await deleteBook(id)?.unwrap();
+            // await deleteBook(id)?.unwrap();
+            await deleteBook(id);
             Swal.fire({
                         title: "Book Deleted successfully",
                         // text: "Your order placed successfully!",
@@ -24,13 +25,21 @@ const ManageBooks = () => {
                         confirmButtonText: "Yes, It's Okay!"
                     })
             refetch();
-
+            // console.log("Delete Message::::", id);
         } catch (error) {
             console.error('Failed to delete book:', error.message);
-            alert('Failed to delete book. Please try again.');
+            // alert('Failed to delete book. Please try again.');
+            Swal.fire({
+                title: "Book Deleted successfully",
+                // text: "Your order placed successfully!",
+                icon: "warning",
+                showCancelButton: false,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Okay!"
+            })
         }
-        console.log("This is the ::::", id);
-        console.log("This is the ::::", undefined);
+        
     };
 
     // Handle navigating to Edit Book page
@@ -106,6 +115,7 @@ const ManageBooks = () => {
                             </tr> 
                             ))
                         }
+                        
          
 
                     </tbody>
