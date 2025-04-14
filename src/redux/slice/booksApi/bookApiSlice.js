@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-export const API_URL = "http://localhost:5002";
+export const API_URL = "https://book-mgt-backend.vercel.app";
 
 const baseQuery = fetchBaseQuery({baseUrl: API_URL + "/api/books"},{
     credentials: 'include',
