@@ -13,7 +13,7 @@ import { useAuth } from "../reactContext/authContext";
 
 const navigateDropwdown =[  
     // {name: "Profile", href: "/profile"},
-    {name: "Dashboard", href: "/dashboard"},
+    // {name: "Dashboard", href: "/dashboard"},
     {name: "Orders", href: "/orders"},
     {name: "Check Out", href: "/checkout"},
     {name: "Cart", href: "/cart"},

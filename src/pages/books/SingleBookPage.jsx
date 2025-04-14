@@ -11,6 +11,7 @@ const SingleBookPage = () => {
     const {data: book, isLoading, isError} = useFetchBookByIdQuery(id);
 
     const dispatch =  useDispatch();
+    console.log("Book SinglePage::::", book);
 
     const handleAddToCart = (product) => {
         dispatch(addToCart(product))
@@ -21,12 +22,12 @@ const SingleBookPage = () => {
     
   return (
     <div className="max-w-lg shadow-md p-5">
-            <h1 className="text-2xl font-bold mb-6">{book?.title}</h1>
+            <h1 className="text-2xl font-bold mb-6">{book?.book.title}</h1>
 
             <div className=''>
                 <div>
                     <img
-                        src={`${getImgUrl(book?.books?.coverImage)}`}
+                        src={`${getImgUrl(book?.book?.coverImage)}`}
                         // src={`${getImgUrl(book?.coverImage)}`}
                         alt={book?.title}
                         className="mb-8"
@@ -34,15 +35,15 @@ const SingleBookPage = () => {
                 </div>
 
                 <div className='mb-5'>
-                    <p className="text-gray-700 mb-2"><strong>Author:</strong> { book?.author || 'admin' }</p>
+                    <p className="text-gray-700 mb-2"><strong>Author:</strong> { book?.book.author || 'admin' }</p>
                     <p className="text-gray-700 mb-4">
-                        <strong>Published:</strong> {new Date( book?.createdAt )?.toLocaleDateString()}
+                        <strong>Published:</strong> {new Date( book?.book.createdAt )?.toLocaleDateString()}
                     </p>
                     <p className="text-gray-700 mb-4 capitalize">
-                        <strong>Category:</strong> { book?.category }
+                        <strong>Category:</strong> { book?.book.category }
                         
                     </p>
-                    <p className="text-gray-700"><strong>Description:</strong> { book?.description }</p>
+                    <p className="text-gray-700"><strong>Description:</strong> { book?.book.description }</p>
                 </div>
 
                 <button onClick={() => handleAddToCart(book)} className="btn-primary px-6 space-x-1 flex items-center gap-1 ">

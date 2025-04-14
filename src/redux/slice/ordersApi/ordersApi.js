@@ -5,7 +5,7 @@ import { API_URL } from '../booksApi/bookApiSlice';
 // const API_URL = "http://localhost:5002";
 
 //
-const baseQuery = fetchBaseQuery({baseUrl: {API_URL} + "/api/orders"},{
+const baseQuery = fetchBaseQuery({baseUrl: API_URL + "/api/orders"},{
     credentials: 'include',
     prepareHeaders: (Headers) => {
         const token = localStorage.getItem('token');
@@ -26,6 +26,7 @@ export const ordersApi = createApi({
 
     // Create endpoints
     endpoints: (builder) =>({
+
         // CREATE all orders
         createOrder: builder.mutation({
             query: (newOrder) => ({
@@ -33,8 +34,15 @@ export const ordersApi = createApi({
                 method: 'POST',
                 body: newOrder,
                 credentials: 'include',
-                providesTags: ['Orders']
-            })
+                // withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+
+                },
+
+            }),
+            providesTags: ['Orders']
         }),
 
         //GET ORDERS BY EMAIL
@@ -42,8 +50,14 @@ export const ordersApi = createApi({
             query: (email) => ({
                 url: `/email/${email}`,
                 method: 'GET',
-                body: email,
+                // body: email,
                 credentials: 'include',
+                // withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+
+                }
             }),
             providesTags: ['Orders']
     })

@@ -28,7 +28,6 @@ const AdminLogin = () => {
                 }
             })
            const auth = response.data;
-           console.log(response.data)
            
            //CHECK IF TOKEN EXISTS AND REDIRECT TO DASHBOARD
            if(auth.token){
@@ -38,7 +37,8 @@ const AdminLogin = () => {
                     setMessage('Expired token. Please login again');
                     navigate('/');
                 }, 3600 * 1000);
-            }
+            }else{
+                setMessage('Invalid Username and Password');}
               Swal.fire({
                             title: "Admin Login Successful",
                             // text: "Your order placed successfully!",

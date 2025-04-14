@@ -42,8 +42,8 @@ const Checkout = () => {
         }
 
         try {
-           await createOrder(newOrder).unwrap();
-            // console.log(order);
+        //    await createOrder(newOrder).unwrap();
+           await createOrder(newOrder);
             Swal.fire({
                 title: "Confirmed Order",
                 text: "Your order placed successfully!",
@@ -56,7 +56,15 @@ const Checkout = () => {
             navigate("/orders")          
         } catch (error) {
             console.error("Error place an order", error);
-            alert("Failed to place an order")
+            Swal.fire({
+                title: "Unable to place an order",
+                // text: "Una!",
+                icon: "warning",
+                showCancelButton: false,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, It's Okay!"
+            })
         }
 
         // try {
@@ -75,8 +83,6 @@ const Checkout = () => {
         //     console.error("Error place an order", error);
         //     alert("Failed to place an order")
         // }
-        console.log(newOrder);
-        
     }
 
     if(isLoading) return < Loader />

@@ -2,10 +2,9 @@ import { useEffect } from 'react'
 // import InputField from '../addBook/InputField'
 // import SelectField from '../addBook/SelectField'
 import { useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import axios from 'axios';
-import { API_URL, useFetchBookByIdQuery, useUpdateBookMutation } from '../../../redux/slice/booksApi/bookApiSlice';
+import {  useFetchBookByIdQuery, useUpdateBookMutation } from '../../../redux/slice/booksApi/bookApiSlice';
 import Loading from '../../../components/Loader';
 import InputField from '../Add-book/InputField';
 import SelectField from '../Add-book/SelectedField';
@@ -15,12 +14,11 @@ const UpdateEditBooks = () => {
   
   const { id } = useParams();
   const { data: bookData, isLoading, isError, refetch } = useFetchBookByIdQuery(id);
-  // console.log(bookData)
   const [updateBook] = useUpdateBookMutation();
   const { register, handleSubmit, setValue, reset } = useForm();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("bookData::::::::::"  ,bookData)
     if (bookData) {
       setValue('title', bookData.book.title);
       setValue('description', bookData.book.description);
@@ -43,7 +41,6 @@ const UpdateEditBooks = () => {
       newPrice: Number(data?.newPrice),
       coverImage: data?.coverImage || bookData?.coverImage,
     };
-    console.log("Book data :::::", data.title)
     try {
       // await updateBook({id, updateBookData}).unwrap();
       await updateBook({id, ...updateBookData})
@@ -64,6 +61,8 @@ const UpdateEditBooks = () => {
         confirmButtonText: "Yes, It's Okay!"
       });
       await refetch()
+      reset()
+      navigate('/dashboard/manage-books');
     } catch (error) {
       console.log("Failed to update book.", error.message);
       alert("Failed to update book.");

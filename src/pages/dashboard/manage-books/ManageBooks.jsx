@@ -30,7 +30,7 @@ const ManageBooks = () => {
             console.error('Failed to delete book:', error.message);
             // alert('Failed to delete book. Please try again.');
             Swal.fire({
-                title: "Book Deleted successfully",
+                title: " Unable to Deleted Book",
                 // text: "Your order placed successfully!",
                 icon: "warning",
                 showCancelButton: false,

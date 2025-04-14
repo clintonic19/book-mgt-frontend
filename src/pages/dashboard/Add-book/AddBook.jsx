@@ -4,6 +4,8 @@ import Swal from 'sweetalert2';
 import { useAddBookMutation } from '../../../redux/slice/booksApi/bookApiSlice';
 import InputField from '../Add-book/InputField';
 import SelectField from '../Add-book/SelectedField';
+import { useNavigate } from 'react-router-dom';
+
 
 const AddBook = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
@@ -11,6 +13,7 @@ const AddBook = () => {
     const [imageFile, setImageFile] = useState(null);
     const [addBook, {isLoading, isError}] = useAddBookMutation()
     const [imageFileName, setImageFileName] = useState('')
+    const navigate = useNavigate();
 
     // Handle form submission
     const onSubmit = async (data, e) => {
@@ -35,6 +38,7 @@ const AddBook = () => {
               reset();
               setImageFileName('')
               setImageFile(null);
+              navigate('/dashboard/manage-books');
         } catch (error) {
             console.error(error);
             // alert("Failed to add book. Please try again.", isError);
