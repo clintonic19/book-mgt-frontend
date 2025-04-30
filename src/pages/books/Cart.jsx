@@ -2,9 +2,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom"
 import { clearCart, removeFromCart } from "../../redux/slice/cartSlice";
 import { getImgUrl } from "../../utils/imgUrl";
+import { useState } from "react";
 
 const Cart = () => {
 
+    const [quantity, setQuantity] = useState(1);
+
+  const increment = () => setQuantity(prev => prev + 1);
+  const decrement = () => setQuantity(prev => (prev > 1 ? prev - 1 : 1));
     const cartItems = useSelector(state => state.cart.cartItems);
     const dispatch =  useDispatch()
 
@@ -63,9 +68,26 @@ const Cart = () => {
                                                             </div>
                                                             <p className="mt-1 text-sm text-gray-500 capitalize"><strong>Category: </strong>{product?.category}</p>
                                                         </div>
-                                                        <div className="flex flex-1 flex-wrap items-end justify-between space-y-2 text-sm">
-                                                            <p className="text-gray-500"><strong>Qty:</strong> 1</p>
+                                                        <div className=" flex flex-1 flex-wrap items-end justify-between space-y-2 text-sm">
+                                                 <div className="flex gap-2">
+                            {/* ADD INCREMENT AND DECREMENT BUTTON TO CART */}
+                                                        <button
+                                                        onClick={decrement}
+                                                            className="px-2 py-1 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
+                                                            -
+                                                        </button>
 
+                                                        
+                                                        <div className="px-3 text-gray-500 flex flex-col"><strong>Qty:</strong> 1  </div>
+                                                        
+                                                        <button
+                                                        onClick={increment}
+                                                            className="px-2 py-1 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
+                                                           +
+                                                        </button>
+
+                                                 </div>
+        
                                                             <div className="flex">
                                                                 <button
                                                                 onClick={() => handleRemoveFromCart(product)}

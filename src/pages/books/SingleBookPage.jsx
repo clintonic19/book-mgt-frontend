@@ -30,6 +30,7 @@ const SingleBookPage = () => {
                         src={`${getImgUrl(book?.book?.coverImage)}`}
                         // src={`${getImgUrl(book?.coverImage)}`}
                         alt={book?.title}
+                        size = {50}
                         className="mb-8"
                     />
                 </div>

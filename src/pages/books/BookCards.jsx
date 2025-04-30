@@ -25,7 +25,7 @@ const BookCards = ({book}) => {
         <div
             className="flex flex-col sm:flex-row sm:items-center sm:h-72  sm:justify-center gap-4"
         >
-            <div className="sm:h-72 sm:flex-shrink-0 border rounded-md">
+            <div className="sm:h72 sm:flex-shrink-0 border rounded-md">
             <Link to = {`/books/${book?._id}`}>
                 <img
                 sizes={510}
@@ -50,7 +50,7 @@ const BookCards = ({book}) => {
             </p>
             <button
                 onClick={() => addToCartHandler(book)}
-             className="btn-primary text-white px-6 space-x-1 flex items-center gap-1 ">
+             className="btn-primary text-white p-3 space-x-1 flex items-center gap-1 ">
                 <FiShoppingCart className=" " />
                 <span className="" >Add to Cart</span>
             </button>

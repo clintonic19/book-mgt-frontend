@@ -48,7 +48,7 @@ const Login = () => {
             alert('User Logged In Successfully', user);
         } catch (error) {
             console.log(error);
-            setEmail('Unable to Sign In With Google Auth');
+            setMessage('Unable to Sign In With Google Auth');
         }
       }
 

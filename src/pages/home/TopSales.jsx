@@ -98,7 +98,6 @@ const TopSales = () => {
               //   ))
               // Object.keys(books).length > 0 && books?.books?.map((book, index) => (
                 // filteredBooks?.data?.length > 0 && filteredBooks?.map((book, index) => (
-                  console.log(":::::::::BOOK", ),
                     <SwiperSlide key={index} >
                         <BookCards book={book}/>
                     </SwiperSlide>
