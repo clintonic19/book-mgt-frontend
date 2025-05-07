@@ -41,6 +41,16 @@ export const booksApi = createApi({
             })
         }),
 
+        // Search for books
+        searchBooks: builder.query({
+            query: (query) => ({
+                url: `/search?q=${query}`,
+                method: 'GET',
+                credentials: 'include',
+                providesTags: ['Books']
+            })
+        }),
+
         // Add a book
         addBook: builder.mutation({
             query: (data) => ({
@@ -105,7 +115,7 @@ export const booksApi = createApi({
 
 
 export const { useFetchAllBooksQuery, useFetchBookByIdQuery, useAddBookMutation, 
-                useUpdateBookMutation, useDeleteBookMutation } = booksApi
+                useUpdateBookMutation, useDeleteBookMutation, useSearchBooksQuery } = booksApi
 export default booksApi;
 
 

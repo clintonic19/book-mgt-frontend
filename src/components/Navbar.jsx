@@ -22,13 +22,25 @@ const navigateDropwdown =[
 const Navbar = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const { currentUser, logout } = useAuth();
+    const [ searchQuery, setSearchQuery] = useState('');
     const navigate = useNavigate();
  
     //ADDING THE CART ITEMS FROM REDUX STORE, CARTSLICE AND DISPLAYING IT IN THE NAVBAR
     const cartItem = useSelector(state => state.cart.cartItems);
 
+    const handleSearch = (e) =>{
+        e.preventDefault();
+        if(searchQuery.trim() != ''){
+             // Example: Navigate to a search page with query as URL param
+            navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
+            // navigate(`/search?q=${searchQuery}`);
+            setSearchQuery('');
+        }else{
+            navigate('/');
+        }
+    }
+   
     //LOGOUT FUNCTION
-
   const handleLogout =  () =>{
         try {
             logout();
@@ -50,11 +62,27 @@ const Navbar = () => {
             </Link>
 
             {/* Search Bar Input  */}
-            <div className="relative sm:w-72 w-40 space-x-2">
-                <IoSearch size={18} className="absolute inline-block left-4 inset-y-2" />
-                <input type="text" placeholder="Search here..." 
-                className="bg-[#EAEAEA] w-full py-1 md:px-8 px-6 rounded-md focus:outline-none " />
-            </div>
+            {/* <div className="relative sm:w-72 w-40 space-x-2 "> */}
+                {/* <IoSearch size={18} className="absolute inline-block left-4 inset-y-2" /> */}
+                {/* <input type="text" placeholder="Search here..." className="bg-[#EAEAEA] w-full py-1 md:px-8 px-6 rounded-md focus:outline-none " /> */}
+                {/* <button className="flex flex-col">Search</button> */}
+            {/* </div> */}
+
+            {/* NEW CODE FOR SEARCH BAR */}
+
+            <div className="flex w-full gap-5 ">
+            <IoSearch size={30} className="relative inline-block left-11 inset-y-1" />
+            <input
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                type="email"
+                placeholder="Search books..."
+                className="bg-[#EAEAEA] w-full py-1  md:px-8 px-6 rounded-md focus:outline-none"
+            />
+            <button onClick={handleSearch} className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-dark">
+              Search
+            </button>
+          </div>
         </div>
 
         {/* Right side of the Navbar */}
@@ -89,7 +117,9 @@ const Navbar = () => {
                 </>
             ) : (
                 <div className="flex items-center gap-4">
-                    <Link to="/login" className="text-primary"><FaUser size={20}/></Link>
+                    <Link to="/login" className="text-primary flex gap-2">
+                    <FaUser size={20}/> Account
+                    </Link>
                 </div>
             )
         }
@@ -107,7 +137,8 @@ const Navbar = () => {
                     cartItem.length > 0 ? (
                         <span className="text-sm font-semibold sm:ml-1">{cartItem.length}</span>
                     ) : (
-                        <span className="text-sm font-semibold sm:ml-1">0</span> 
+                        <span className="text-sm font-semibold sm:ml-1">Cart</span> 
+                        // <span className="text-sm font-semibold sm:ml-1">0</span> 
                     )
                 }                           
             </Link>

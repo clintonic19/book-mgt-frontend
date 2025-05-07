@@ -18,7 +18,7 @@ const SingleBookPage = () => {
     }
 
     if(isLoading) return <div className='py-5'><Loading/></div>
-    // if(isError) return <div>Error Occurred trying to load book info</div>
+    if(isError) return <div>Error Occurred trying to load book info</div>
     
   return (
     <div className="max-w-lg shadow-md p-5">

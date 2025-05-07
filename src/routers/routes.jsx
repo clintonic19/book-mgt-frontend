@@ -15,6 +15,7 @@ import DashboardLayout from '../pages/dashboard/DashboardLayout.jsx';
 import ManageBooks from '../pages/dashboard/manage-books/ManageBooks.jsx';
 import UpdateEditBooks from '../pages/dashboard/Edit-books/UpdateEditBooks.jsx';
 import AddBook from '../pages/dashboard/Add-book/AddBook.jsx';
+import SearchPage from '../pages/home/SearchPage.jsx';
 
 const router = createBrowserRouter([
 
@@ -37,6 +38,11 @@ const router = createBrowserRouter([
             {
                 path:'/about',
                 element: <h1>About</h1>
+            },
+// Search Page Route
+            {
+                path:'/search',
+                element: <SearchPage/>
             },
 
             {

@@ -6,10 +6,11 @@ import { useState } from "react";
 
 const Cart = () => {
 
-    const [quantity, setQuantity] = useState(1);
+//     const [quantity, setQuantity] = useState(1);
 
-  const increment = () => setQuantity(prev => prev + 1);
-  const decrement = () => setQuantity(prev => (prev > 1 ? prev - 1 : 1));
+//   const increment = () => setQuantity(prev => prev + 1);
+//   const decrement = () => setQuantity(prev => (prev > 1 ? prev - 1 : 1));
+
     const cartItems = useSelector(state => state.cart.cartItems);
     const dispatch =  useDispatch()
 
@@ -72,7 +73,7 @@ const Cart = () => {
                                                  <div className="flex gap-2">
                             {/* ADD INCREMENT AND DECREMENT BUTTON TO CART */}
                                                         <button
-                                                        onClick={decrement}
+                                                        // onClick={decrement}
                                                             className="px-2 py-1 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
                                                             -
                                                         </button>
@@ -81,7 +82,7 @@ const Cart = () => {
                                                         <div className="px-3 text-gray-500 flex flex-col"><strong>Qty:</strong> 1  </div>
                                                         
                                                         <button
-                                                        onClick={increment}
+                                                        // onClick={increment}
                                                             className="px-2 py-1 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
                                                            +
                                                         </button>
