@@ -15,14 +15,13 @@ const SearchPage = () => {
   const query = new URLSearchParams(location.search).get("q")?.toLowerCase() || "";
   const  {data: book, isLoading }  = useSearchBooksQuery(query);
 
-  console.log("Find Book:::", book);
-  console.log("Find Book ID:::::", book?.book?.book._id);
-
+  console.log("Find Book ID:::::", book?.books._id);
 
   // Filter the books based on query
   const filteredBooks = book?.filter(book =>
     book?.title?.toLowerCase().includes(query)
   );
+  console.log("Filter Book:::", filteredBooks);
 
   if(isLoading) return < Loader />
 
@@ -33,7 +32,7 @@ const SearchPage = () => {
       {filteredBooks?.length > 0 ? (
         <ul className="space-y-3">
           {filteredBooks?.map(book => (
-            <li key={book?.id} className="border p-4 rounded-md shadow hover:shadow-md transition">
+            <li key={book?._id} className="border p-4 rounded-md shadow hover:shadow-md transition">
               <h2 className="text-xl font-semibold">{book?.title}</h2>
               <p className="text-sm text-gray-600">by {book?.description}</p>
             </li>

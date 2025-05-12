@@ -1,20 +1,30 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom"
-import { clearCart, removeFromCart } from "../../redux/slice/cartSlice";
+import { clearCart, removeFromCart, incrementQty,
+    decrementQty } from "../../redux/slice/cartSlice";
 import { getImgUrl } from "../../utils/imgUrl";
 import { useState } from "react";
 
 const Cart = () => {
 
-//     const [quantity, setQuantity] = useState(1);
-
-//   const increment = () => setQuantity(prev => prev + 1);
-//   const decrement = () => setQuantity(prev => (prev > 1 ? prev - 1 : 1));
-
     const cartItems = useSelector(state => state.cart.cartItems);
     const dispatch =  useDispatch()
 
-    const totalPrice =  cartItems.reduce((acc, item) => acc + item.newPrice, 0).toFixed(2);
+    //TOTAL PRICE CALCULATION
+    // const totalPrice =  cartItems.reduce((acc, item) => acc + item.newPrice, 0).toFixed(2);
+
+    //updated code to calculate total price based on quantity
+    // const totalPrice = cartItems.reduce((acc, item) => acc + item.newPrice * item.quantity, 0)
+    //         .toFixed(2);
+
+    // Updated code new code Calculate the total price based on quantity
+    const totalPrice = cartItems
+  .reduce((acc, item) => acc + (parseFloat(item.newPrice || 0) * (item.quantity || 1)), 0)
+  .toFixed(2);
+
+  console.log("Total Price::::", totalPrice.quantity);
+
+           
 
     const handleRemoveFromCart = (product) => {
         dispatch(removeFromCart(product))
@@ -71,18 +81,22 @@ const Cart = () => {
                                                         </div>
                                                         <div className=" flex flex-1 flex-wrap items-end justify-between space-y-2 text-sm">
                                                  <div className="flex gap-2">
+                            
                             {/* ADD INCREMENT AND DECREMENT BUTTON TO CART */}
                                                         <button
                                                         // onClick={decrement}
+                                                        onClick={() => dispatch(decrementQty(product))}
                                                             className="px-2 py-1 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
                                                             -
                                                         </button>
 
                                                         
-                                                        <div className="px-3 text-gray-500 flex flex-col"><strong>Qty:</strong> 1  </div>
+                                                        {/* <div className="px-3 text-gray-500 flex flex-col"><strong>Qty:</strong> 1  </div> */}
+                                                        <div className="px-3 text-gray-500 flex flex-col"><strong>Qty:</strong> {product?.quantity} </div>
                                                         
                                                         <button
                                                         // onClick={increment}
+                                                        onClick={() => dispatch(incrementQty(product))}
                                                             className="px-2 py-1 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
                                                            +
                                                         </button>
